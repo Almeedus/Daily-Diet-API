@@ -74,6 +74,5 @@ Dar exemplos
 * [Docker](https://docs.docker.com/) - Usado para gerar o container de MySQL
 * [MySQL](https://dev.mysql.com/doc/) - Banco de Dados utilizado
 * [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/) - Extensão para o FLask para dar suporte ao SQL na aplicação.
-* [Flask-Login](https://flask-login.readthedocs.io/en/latest/) - Usada para gerenciar a seção do usuário
 * [Werkzeug](https://werkzeug.palletsprojects.com/en/3.0.x/) - Biblioteca abrangente de aplicativos da web WSGI.
 * [Pymysql](https://pymysql.readthedocs.io/en/latest/) - Usado para criar o banco de dados.
