@@ -16,10 +16,42 @@ def get_items():
     items = Item.query.all()
     
     #retornando todos os registros em JSON
-    try:
-        return jsonify([item.serialize() for item in items]),200
-    except:
-        return jsonify({'message': 'Erro ao realizar busca.'}),500
+    if items:
+        return jsonify([item.serialize() for item in items]), 200
+    else:
+        return jsonify({'message': 'Erro ao realizar busca.'}), 500
+
+
+@app.route("/items/<int:id>", methods=['GET'])
+def get_item(id):
+    item = Item.query.get(id)
+    
+    if item:
+        return jsonify(item.serialize()), 200
+    else:
+        return jsonify({"message": "Item não encontrado"}), 404
+    
+    
+@app.route("/items/<int:id>", methods=['PUT'])
+def update_item(id):
+    data = request.json
+    item = Item.query.get(id)
+    
+    if item:
+        item.name = data.get("name")
+        item.description = data.get("description")
+        item.dateTime = data.get("dateTime")
+        item.onDiet = data.get("onDiet")
+        
+        db.session.commit()
+        return jsonify({"message": "Item atualizado com sucesso"}), 200
+    
+    else:
+        return jsonify({"message": "Item não encontrado"}), 404
+
+
+
+
 
 
 if __name__ == "__main__":
