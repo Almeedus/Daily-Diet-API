@@ -5,7 +5,7 @@ class Item(db.Model):
     name = db.Column(db.String(80), nullable=True, )
     description = db.Column(db.String(80), default="None")
     dateTime = db.Column(db.DateTime, nullable=False)
-    onDiet = db.Column(db.Boolean)
+    onDiet = db.Column(db.Boolean, default=True)
     
     def serialize(self):
         return {
