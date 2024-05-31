@@ -50,9 +50,38 @@ def update_item(id):
         return jsonify({"message": "Item não encontrado"}), 404
 
 
+@app.route("/items/new", methods=["POST"])
+def new_item():
+    data = request.json
+    name = data.get("name")
+    description = data.get("description")
+    dateTime = data.get('dateTime')
+    onDiet = data.get('onDiet')
+    item = None
+    
+    if name:
+        item = Item(name=name,
+                description=description,
+                dateTime=dateTime,
+                onDiet=onDiet)
+        
+        db.session.add(item)
+        db.session.commit()
+        return jsonify({"message":"Refeição criada com sucesso"}), 200
+
+    return jsonify({"message":"Dados inválidos"}), 400
 
 
-
+@app.route("/items/<int:id>", methods=["DELETE"])
+def delete_item(id):
+    item = Item.query.get(id)
+    
+    if item:
+        db.session.delete(item)
+        db.session.commit()
+        return jsonify({"message": "Item deletado com sucesso"}), 200
+    
+    return jsonify({"message": "Item não encontrado"}), 404 
 
 if __name__ == "__main__":
     app.run(debug=True)
